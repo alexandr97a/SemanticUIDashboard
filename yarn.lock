@@ -5576,6 +5576,11 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
+hydro-js@^1.4.4:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/hydro-js/-/hydro-js-1.4.5.tgz#866d43e57b5cb53c177d11c8ef4080391fa0ba95"
+  integrity sha512-vIoeFSRmkKqibhwtBqPItdJF3GglzrpRRcgAZ+TI+VTYQmb15/MF8JElhGXu38AKRZSkzJBpbZsMK2qUgUqU5A==
+
 iconv-lite@0.4.24:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -7885,6 +7890,11 @@ path-to-regexp@0.1.7:
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
   integrity sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
 
+path-to-regexp@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-6.2.0.tgz#f7b3803336104c346889adece614669230645f38"
+  integrity sha512-f66KywYG6+43afgE/8j/GoiNyygk/bnoCbps++3ErRKsIYkGGupyv07R2Ok5m9i67Iqc+T2g1eAUGUPzWhYTyg==
+
 path-type@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-2.0.0.tgz#f012ccb8415b7096fc2daa1054c3d72389594c73"
@@ -9470,6 +9480,14 @@ rollup@^1.31.1:
     "@types/estree" "*"
     "@types/node" "*"
     acorn "^7.1.0"
+
+router-dom@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/router-dom/-/router-dom-2.2.3.tgz#4b29bab989e90383ff66602f7811a0eaf7a44e2e"
+  integrity sha512-eMHBzWVjtsM8ccMURvQuN8VY06v4VcQ+xlKclQ2iL9Dpjsw6IQZ4lgF2YAFfE7ylCVKUugMb0AgRqFkK3DTNog==
+  dependencies:
+    hydro-js "^1.4.4"
+    path-to-regexp "^6.2.0"
 
 rsvp@^4.8.4:
   version "4.8.5"
