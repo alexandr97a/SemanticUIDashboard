@@ -47,9 +47,9 @@ class Main extends React.Component {
       return(
         <Fragment>
           <Navbar/>
-            <Grid className='container'>
+            <Grid id="mylayout">
             <Grid.Row columns={1}>
-              <Grid.Column>
+              <Grid.Column id="mytable" aligned="right">
                 <Button animated='fade' as={Link} to='/add_table'>
                   <Button.Content visible>글쓰기</Button.Content>
                   <Button.Content hidden>
@@ -58,8 +58,8 @@ class Main extends React.Component {
                 </Button>
               </Grid.Column >
             </Grid.Row>
-            <Grid.Row columns={1}>
-              <Grid.Column width={16} className='wrapper'>
+            <Grid.Row columns={1} >   
+              <Grid.Column width={16} id="mytable" className='wrapper'>
               <Table stackable>
                 <Table.Header>
                   <Table.Row>
@@ -105,7 +105,7 @@ class Main extends React.Component {
               </Table>
               </Grid.Column>
             </Grid.Row>
-            </Grid>
+          </Grid>
         </Fragment>
       )
   };
