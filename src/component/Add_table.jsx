@@ -4,6 +4,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Grid,Form,Button, Input } from 'semantic-ui-react'
 import Navbar from "./Navbar";
+import '../style/Add_table.css'
 
 
 class Add_table extends React.Component {

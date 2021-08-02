@@ -4,6 +4,7 @@ import { Icon,Grid,Table,Button } from 'semantic-ui-react'
 import axios from 'axios';
 import Moment from 'react-moment';
 import Navbar from "./Navbar";
+import '../style/Main.css'
 
 class Main extends React.Component {
   constructor(props) {
@@ -46,9 +47,9 @@ class Main extends React.Component {
       return(
         <Fragment>
           <Navbar/>
-            <Grid>
-            <Grid.Row  columns={1}>
-              <Grid.Column floated='right' width={3}>
+            <Grid className='container'>
+            <Grid.Row columns={1}>
+              <Grid.Column>
                 <Button animated='fade' as={Link} to='/add_table'>
                   <Button.Content visible>글쓰기</Button.Content>
                   <Button.Content hidden>
@@ -57,53 +58,53 @@ class Main extends React.Component {
                 </Button>
               </Grid.Column >
             </Grid.Row>
-              <Grid.Row centered columns={1}>
-                <Grid.Column width={13}>
-                <Table celled>
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.HeaderCell>번호</Table.HeaderCell>
-                      <Table.HeaderCell>제목</Table.HeaderCell>
-                      <Table.HeaderCell>글쓴이</Table.HeaderCell>
-                      <Table.HeaderCell>등록일</Table.HeaderCell>
-                      <Table.HeaderCell>기능</Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                  {table.length !== 0 ? 
-                      table.map( (el, key) => {
-                        const view_url = 'table/'+el.table_id;
-                        const link = () =>{
-                          return window.location.href=view_url;
-                        }
-                        // const edit_view_url = 'edit_table/'+el.id;
-                        // const editlink = () =>{
-                        //   return window.location.href=edit_view_url;
-                        // }
-                        // console.log('el',el)
-                        return(
-                            <Table.Row key={key}>
-                            <Table.Cell onClick={link}>{el.table_id}</Table.Cell>
-                            <Table.Cell onClick={link}>{el.table_title}</Table.Cell>
-                            <Table.Cell onClick={link}>{el.table_autor}</Table.Cell>
-                            <Table.Cell onClick={link}><Moment format="YYYY-MM-DD" date={el.createdAt}/></Table.Cell>
-                            <Table.Cell>
-                              <Button animated='fade' onClick={() => this._delete(el)}>
-                                <Button.Content visible>Delete</Button.Content>
-                                <Button.Content hidden>
-                                  <Icon name='delete' />
-                                </Button.Content>
-                              </Button>
-                            </Table.Cell>
-                          </Table.Row>
+            <Grid.Row columns={1}>
+              <Grid.Column width={16} className='wrapper'>
+              <Table stackable>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>번호</Table.HeaderCell>
+                    <Table.HeaderCell>제목</Table.HeaderCell>
+                    <Table.HeaderCell>글쓴이</Table.HeaderCell>
+                    <Table.HeaderCell>등록일</Table.HeaderCell>
+                    <Table.HeaderCell>기능</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                {table.length !== 0 ? 
+                    table.map( (el, key) => {
+                      const view_url = 'table/'+el.table_id;
+                      const link = () =>{
+                        return window.location.href=view_url;
+                      }
+                      // const edit_view_url = 'edit_table/'+el.id;
+                      // const editlink = () =>{
+                      //   return window.location.href=edit_view_url;
+                      // }
+                      // console.log('el',el)
+                      return(
+                          <Table.Row key={key}>
+                          <Table.Cell onClick={link}>{el.table_id}</Table.Cell>
+                          <Table.Cell onClick={link}>{el.table_title}</Table.Cell>
+                          <Table.Cell onClick={link}>{el.table_autor}</Table.Cell>
+                          <Table.Cell onClick={link}><Moment format="YYYY-MM-DD" date={el.createdAt}/></Table.Cell>
+                          <Table.Cell>
+                            <Button animated='fade' onClick={() => this._delete(el)}>
+                              <Button.Content visible>Delete</Button.Content>
+                              <Button.Content hidden>
+                                <Icon name='delete' />
+                              </Button.Content>
+                            </Button>
+                          </Table.Cell>
+                        </Table.Row>
 
-                        )
-                      })
-                      : <Fragment>데이터가 없습니다.</Fragment>}
-                  </Table.Body>
-                </Table>
-                </Grid.Column>
-              </Grid.Row>
+                      )
+                    })
+                    : <Fragment>데이터가 없습니다.</Fragment>}
+                </Table.Body>
+              </Table>
+              </Grid.Column>
+            </Grid.Row>
             </Grid>
         </Fragment>
       )

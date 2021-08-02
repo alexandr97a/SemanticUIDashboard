@@ -4,6 +4,7 @@ import Navbar from "./Navbar.jsx";
 import { Grid, Input, Form, Button} from 'semantic-ui-react'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import '../style/Edit_table.css'
 
 
 class Edit_table extends React.Component {
@@ -85,16 +86,18 @@ _save = async () => {
       return(
         <Fragment>
           <Navbar/>
-          <Grid centered>
-            <Grid.Column floated='right' width={3}>
+          <Grid>
+          <Grid.Row columns={1}>
+            <Grid.Column>
               <Button onClick={()=>this._save() }>
                 완료
               </Button>
             </Grid.Column>
+          </Grid.Row>
             <Grid.Row columns={1}>
               {table != null ?
                     <Fragment>
-                      <Grid.Column floated='center' width={13}>
+                      <Grid.Column floated='center' width={16}>
                       <Form onSubmit={this._addTable}>
                         <Form.Field required>
                           <label>제목</label>

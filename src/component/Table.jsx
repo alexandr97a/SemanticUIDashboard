@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from "./Navbar.jsx";
 import { Segment, Grid, Header, Form, Button, TextArea,Icon } from 'semantic-ui-react'
 import Moment from 'react-moment';
+import '../style/Table.css'
 
 class Main extends React.Component {
   constructor(props) {
@@ -67,9 +68,9 @@ class Main extends React.Component {
       return(
         <Fragment>
           <Navbar/>
-          <Grid  centered>
+          <Grid>
           <Grid.Row columns={1}>
-          <Grid.Column floated='right' width={3} >
+          <Grid.Column >
             <Button animated='fade' onClick={() => this.editlink()}>
               <Button.Content visible>수정</Button.Content>
               <Button.Content hidden>
@@ -80,7 +81,7 @@ class Main extends React.Component {
           </Grid.Row>
           <Grid.Row columns={1}>
             {table != null ?
-                  <Grid.Column width={13} >
+                  <Grid.Column width={16} >
                     <Grid.Row columns={1}>
                     <Segment attached>
                       <Header
@@ -103,7 +104,7 @@ class Main extends React.Component {
           </Grid>
           <Grid centered>
           <Grid.Row columns={1}>
-          <Grid.Column width={13} >
+          <Grid.Column width={16} >
             <Segment padded attached>
                 <Header as='h3' >
                   댓글
