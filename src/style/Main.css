@@ -10,6 +10,11 @@
     text-align: right;
     width: 100%;
 }
+
+#addBtn .tableAll{
+    height: 70vh;
+}
+
 #mylayoutMain .tableRow{
     cursor: pointer;
 }

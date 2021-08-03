@@ -6,6 +6,7 @@ import Moment from 'react-moment';
 import Navbar from "./Navbar";
 import '../style/Main.css'
 
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -60,9 +61,9 @@ class Main extends React.Component {
             </Grid.Row>
             <Grid.Row columns={1} >   
               <Grid.Column width={16} id="addBtn" className='wrapper'>
-              <Table selectable>
+              <Table selectable className="tableAll">
                 <Table.Header>
-                  <Table.Row className="tableRow">
+                  <Table.Row>
                     <Table.HeaderCell className="tableNumber">번호</Table.HeaderCell>
                     <Table.HeaderCell>제목</Table.HeaderCell>
                     <Table.HeaderCell>글쓴이</Table.HeaderCell>
