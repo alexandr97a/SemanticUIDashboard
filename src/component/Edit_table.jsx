@@ -86,9 +86,9 @@ _save = async () => {
       return(
         <Fragment>
           <Navbar/>
-          <Grid>
+          <Grid id="mylayoutEdit_table">
           <Grid.Row columns={1}>
-            <Grid.Column>
+            <Grid.Column id="editBtn">
               <Button onClick={()=>this._save() }>
                 완료
               </Button>
@@ -97,7 +97,7 @@ _save = async () => {
             <Grid.Row columns={1}>
               {table != null ?
                     <Fragment>
-                      <Grid.Column floated='center' width={16}>
+                      <Grid.Column floated='center' width={16} className="addtableClm">
                       <Form onSubmit={this._addTable}>
                         <Form.Field required>
                           <label>제목</label>

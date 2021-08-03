@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import { Link } from 'react-router-dom'
-import { Icon,Grid,Table,Button } from 'semantic-ui-react'
+import { Icon,Grid,Table,Button, Menu } from 'semantic-ui-react'
 import axios from 'axios';
 import Moment from 'react-moment';
 import Navbar from "./Navbar";
@@ -47,9 +47,9 @@ class Main extends React.Component {
       return(
         <Fragment>
           <Navbar/>
-            <Grid id="mylayout">
+          <Grid id="mylayoutMain">
             <Grid.Row columns={1}>
-              <Grid.Column id="mytable" aligned="right">
+              <Grid.Column id="addBtn">
                 <Button animated='fade' as={Link} to='/add_table'>
                   <Button.Content visible>글쓰기</Button.Content>
                   <Button.Content hidden>
@@ -59,15 +59,15 @@ class Main extends React.Component {
               </Grid.Column >
             </Grid.Row>
             <Grid.Row columns={1} >   
-              <Grid.Column width={16} id="mytable" className='wrapper'>
-              <Table stackable>
+              <Grid.Column width={16} id="addBtn" className='wrapper'>
+              <Table selectable>
                 <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell>번호</Table.HeaderCell>
+                  <Table.Row className="tableRow">
+                    <Table.HeaderCell className="tableNumber">번호</Table.HeaderCell>
                     <Table.HeaderCell>제목</Table.HeaderCell>
                     <Table.HeaderCell>글쓴이</Table.HeaderCell>
                     <Table.HeaderCell>등록일</Table.HeaderCell>
-                    <Table.HeaderCell>기능</Table.HeaderCell>
+                    <Table.HeaderCell>삭제</Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
@@ -83,8 +83,8 @@ class Main extends React.Component {
                       // }
                       // console.log('el',el)
                       return(
-                          <Table.Row key={key}>
-                          <Table.Cell onClick={link}>{el.table_id}</Table.Cell>
+                          <Table.Row key={key} className="tableRow">
+                          <Table.Cell className="tableNumber" onClick={link}>{el.table_id}</Table.Cell>
                           <Table.Cell onClick={link}>{el.table_title}</Table.Cell>
                           <Table.Cell onClick={link}>{el.table_autor}</Table.Cell>
                           <Table.Cell onClick={link}><Moment format="YYYY-MM-DD" date={el.createdAt}/></Table.Cell>
@@ -102,6 +102,22 @@ class Main extends React.Component {
                     })
                     : <Fragment>데이터가 없습니다.</Fragment>}
                 </Table.Body>
+                <Table.Footer>
+                <Table.Row>
+                  <Table.HeaderCell colSpan='5'>
+                    <Menu floated='right' pagination>
+                      <Menu.Item as='a' icon>
+                        <Icon name='chevron left' />
+                      </Menu.Item>
+                      <Menu.Item as='a'>1</Menu.Item>
+
+                      <Menu.Item as='a' icon>
+                        <Icon name='chevron right' />
+                      </Menu.Item>
+                    </Menu>
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Footer>
               </Table>
               </Grid.Column>
             </Grid.Row>

@@ -68,43 +68,39 @@ class Main extends React.Component {
       return(
         <Fragment>
           <Navbar/>
-          <Grid>
-          <Grid.Row columns={1}>
-          <Grid.Column >
-            <Button animated='fade' onClick={() => this.editlink()}>
-              <Button.Content visible>수정</Button.Content>
-              <Button.Content hidden>
-                <Icon name='edit' />
-              </Button.Content>
-            </Button>
-          </Grid.Column >
-          </Grid.Row>
-          <Grid.Row columns={1}>
-            {table != null ?
-                  <Grid.Column width={16} >
-                    <Grid.Row columns={1}>
-                    <Segment attached>
-                      <Header
-                        as='h3'
-                      >{table.table_title}</Header>
-                      <Header.Subheader>
-                        {table.table_autor} | <Moment format="YYYY-MM-DD" date={table.createdAt}/>
-                      </Header.Subheader>
-                    </Segment>
-                    </Grid.Row>
-                    <Grid.Row columns={1}>
-                    <Segment attached>
-                      {table.table_text}  
-                    </Segment>
-                    </Grid.Row>
-                  </Grid.Column>
-              
-            : <Fragment>데이터가 없습니다.</Fragment>}
-          </Grid.Row>
+          <Grid id="mylayoutTable">
+            <Grid.Row columns={1}>
+            <Grid.Column className="buttonColumn">
+              <Button animated='fade' onClick={() => this.editlink()}>
+                <Button.Content visible>수정</Button.Content>
+                <Button.Content hidden>
+                  <Icon name='edit' />
+                </Button.Content>
+              </Button>
+            </Grid.Column >
+            </Grid.Row>
+            <Grid.Row columns={1} className="contentRows">
+              {table != null ?
+                    <Grid.Column width={16} className="contentColumn">
+                      <Grid.Row columns={1}>
+                      <Header as='h3' attached='top'>
+                        {table.table_title}
+                        <Header.Subheader className='contentAutor'>
+                        <Icon name='user' />{table.table_autor} | <Moment format="YYYY-MM-DD" date={table.createdAt}/>
+                        </Header.Subheader>
+                      </Header>
+                      <Segment padded attached>
+                        {table.table_text} 
+                      </Segment>
+                      </Grid.Row>
+                    </Grid.Column>
+                
+              : <Fragment>데이터가 없습니다.</Fragment>}
+            </Grid.Row>
           </Grid>
-          <Grid centered>
+          <Grid id="mylayoutTable" centered>
           <Grid.Row columns={1}>
-          <Grid.Column width={16} >
+          <Grid.Column width={16} className='commnetColumn'>
             <Segment padded attached>
                 <Header as='h3' >
                   댓글
@@ -133,9 +129,14 @@ class Main extends React.Component {
                   // console.log('el',el)
                   return(
                     <Fragment>
-                      <Header as='h3' attached='top'>{el.coment_autor}
-                      <Header.Subheader><Moment format="YYYY-MM-DD" date={el.createdAt}/></Header.Subheader>
+                      <Segment  attached='top'>
+                      <Header as='h4' className='commentHeader'>
+                        <Header.Content>
+                          {el.coment_autor}
+                          <Header.Subheader><Moment format="YYYY-MM-DD" date={el.createdAt}/></Header.Subheader>
+                        </Header.Content>
                       </Header>
+                      </Segment>
                       
                       <Segment  attached>{el.coment_text}</Segment>
                     </Fragment>

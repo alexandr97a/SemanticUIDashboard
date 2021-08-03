@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Grid,Form,Button, Input } from 'semantic-ui-react'
+import { Grid,Form,Button, Input, Segment } from 'semantic-ui-react'
 import Navbar from "./Navbar";
 import '../style/Add_table.css'
 
@@ -51,9 +51,9 @@ class Add_table extends React.Component {
       return(
         <Fragment>
           <Navbar/>
-          <Grid>
-              <Grid.Column floated='center'>
-              <Form onSubmit={this._addTable}>
+          <Grid id="mylayoutAdd_table">
+              <Grid.Column className="addtableClm">
+              <Form onSubmit={this._addTable} >
                 <Form.Field required>
                   <label>제목</label>
                   <Input placeholder='제목' onChange={(e) => this._titleUpdate(e)}/>
@@ -80,9 +80,11 @@ class Add_table extends React.Component {
                             console.log( 'Focus.', editor );
                         } }
                     />
-                <Button type="submit">
-                  등록
-                </Button>
+                    <Segment textAlign='center' className="addbtnSegment">
+                      <Button fluid type="submit" size='huge' color='blue' >
+                        등록
+                      </Button>
+                    </Segment>
               </Form>
               </Grid.Column>
           </Grid>

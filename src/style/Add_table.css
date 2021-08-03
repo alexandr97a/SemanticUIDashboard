@@ -1,6 +1,48 @@
-/* .ui.grid{
+.ck-editor__editable {
+    min-height: 60vh;
+  }
+
+#mylayoutAdd_table{
     max-width: 1600px;
     min-width: 1000px;
     width: calc( 100% - 100px);
-    margin: 0 auto !important;
-} */
+    margin: 0 auto;
+    margin-top: 50px;
+/*    margin: 0 auto !important;*/
+}  
+
+#mylayoutAdd_table .addtableClm{
+    padding: 0;
+}
+
+#mylayoutAdd_table .addbtnSegment{
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+@media screen and (max-width: 999px) {
+    #mylayoutAdd_table{
+        max-width: 999px;
+        min-width: 768px;
+    }
+  }
+
+@media screen and (max-width: 768px) {
+    #mylayoutAdd_table{
+        max-width: 768px;
+        min-width: 480px;
+    }
+    .ck-editor__editable {
+        min-height: 40vh;
+      }
+}
+
+@media screen and (max-width: 480px) {
+    #mylayoutAdd_table{
+        max-width: 480px;
+        min-width: 270px;
+        width: 100%;
+    }
+
+}
