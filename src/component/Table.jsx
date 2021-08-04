@@ -4,6 +4,7 @@ import Navbar from "./Navbar.jsx";
 import { Segment, Grid, Header, Form, Button, TextArea,Icon, Dropdown, Input } from 'semantic-ui-react'
 import Moment from 'react-moment';
 import '../style/Table.css'
+import Test from "./Test.jsx";
 
 class Main extends React.Component {
   constructor(props) {
@@ -11,11 +12,11 @@ class Main extends React.Component {
     this.state = { 
       table:[],
       coment:[],
-      coment1:[],
+      comentFnc:'',
       coment_autor:"",
       coment_text:"",
       id:props.match.params.id,
-      editComment: true
+      clickedComment: []
     }
   };
 
@@ -80,8 +81,9 @@ class Main extends React.Component {
   }
 
   _cngWindow(coment_id){
+    console.log('coment_id',coment_id)
     this.setState({
-      editComment: !this.state.editComment, clickedComment: coment_id,
+      comentFnc: !this.state.comentFnc, clickedComment: coment_id,
     })
     // console.log(this.state.editComment)
     // if(this.state.editComment === true){
@@ -96,6 +98,8 @@ class Main extends React.Component {
   
   render() {
     const { table,coment} = this.state;
+    console.log('clickedComment',this.state.clickedComment)
+    console.log('comentFnc',this.state.comentFnc)
 
       return(
         <Fragment>
@@ -154,9 +158,6 @@ class Main extends React.Component {
                 <Segment padded attached>
                   {coment.length !== 0 ? 
                     coment.map( (el, key) => {
-
-                      const { editComment } = this.state;
-
                       return(
                         <Fragment>
                           <Segment key={key}  attached='top'>
@@ -174,7 +175,7 @@ class Main extends React.Component {
                             </Header>
                           </Segment>
                           <Segment  attached>{el.coment_text}</Segment>
-                          {!editComment && <button>Logout</button>}
+                          {this.state.comentFnc && this.state.clickedComment === {key} ? <Test id={key} /> : null}
                         </Fragment>
                       )
                     })
