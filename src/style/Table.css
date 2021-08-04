@@ -23,6 +23,22 @@
     width: 100%;
 }
 
+#mylayoutTable .commnetColumn .commentHeader .commentIcon {
+    padding: 0;
+    position: absolute;
+    font-size: 0.8rem;
+    right: 0;
+    top: 0;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+    
+}
+
+.ui.dropdown .menu{
+    left: -3rem !important;
+}
+
+
 @media only screen and (min-width: 768px) and (max-width: 999px) {
     #mylayoutTable{
         max-width: 999px;

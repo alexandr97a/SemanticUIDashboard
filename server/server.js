@@ -106,7 +106,6 @@ app.post('/add/coment', (req, res) => {
 })
 
 app.get('/get/coment/:id', (req, res) => {
-    console.log('req.params.id  ',req.params.id  )
     Coment.findAll({
         where: {
             tableTableId: req.params.id  
@@ -115,6 +114,14 @@ app.get('/get/coment/:id', (req, res) => {
      .then( result => { res.send(result) })
      .catch( err => { throw err })
  }) 
+
+ app.post('/delete/coment', (req, res) => {
+    Coment.destroy({
+        where : { coment_id : req.body.delete.id }
+    })
+    .then( res.sendStatus(200) )
+    .catch( err => { throw err })
+})
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
