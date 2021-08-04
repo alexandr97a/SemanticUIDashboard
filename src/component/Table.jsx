@@ -11,6 +11,7 @@ class Main extends React.Component {
     this.state = { 
       table:[],
       coment:[],
+      coment1:[],
       coment_autor:"",
       coment_text:"",
       id:props.match.params.id,
@@ -78,13 +79,17 @@ class Main extends React.Component {
     }
   }
 
-  _cngWindow(){
-    if(this.state.editComment === true){
-      this.setState({editComment: !this.state.editComment})
-    }
-    else{
-      this.setState({editComment: !this.state.editComment})
-    }
+  _cngWindow(coment_id){
+    this.setState({
+      editComment: !this.state.editComment, clickedComment: coment_id,
+    })
+    // console.log(this.state.editComment)
+    // if(this.state.editComment === true){
+    //   this.setState({editComment: !this.state.editComment})
+    // }
+    // else{
+    //   this.setState({editComment: !this.state.editComment})
+    // }
   }
 
 
@@ -152,43 +157,24 @@ class Main extends React.Component {
 
                       const { editComment } = this.state;
 
-                      const renderComent=() => {
-                        if(editComment) {
-                          return <>
-                              <Segment key={key}  attached='top'>
-                              <Header as='h4' className='commentHeader'>
-                                <Header.Content>
-                                  {el.coment_autor}
-                                  <Header.Subheader><Moment format="YYYY-MM-DD" date={el.createdAt}/></Header.Subheader>
-                                </Header.Content>
-                                <Dropdown icon="ellipsis vertical" className='commentIcon' pointing>
-                                  <Dropdown.Menu>
-                                    <Dropdown.Item icon='pencil' text='수정' onClick={() => this._cngWindow()}/>
-                                    <Dropdown.Item icon='trash' text='삭제' onClick={() => this._deleteCmt(el)}/>
-                                  </Dropdown.Menu>
-                                </Dropdown>
-                              </Header>
-                              </Segment>
-                              <Segment  attached>{el.coment_text}</Segment>
-                          </>
-                        }
-                        else{
-                          return <>
-                              <Segment key={key}  attached='top'>
-                              <Header as='h4' className='commentHeader'>
-                                <Header.Content>
-                                <Input placeholder='이름' />
-                                  <Header.Subheader><Moment format="YYYY-MM-DD" date={el.createdAt}/></Header.Subheader>
-                                </Header.Content>
-                              </Header>
-                              </Segment>
-                              <Segment  attached><Input placeholder='내용' /></Segment>
-                          </>
-                        }
-                      }
                       return(
                         <Fragment>
-                          {renderComent()}
+                          <Segment key={key}  attached='top'>
+                            <Header as='h4' className='commentHeader'>
+                              <Header.Content>
+                                {el.coment_autor}
+                                <Header.Subheader><Moment format="YYYY-MM-DD" date={el.createdAt}/></Header.Subheader>
+                              </Header.Content>
+                              <Dropdown icon="ellipsis vertical" className='commentIcon' pointing>
+                                <Dropdown.Menu>
+                                  <Dropdown.Item icon='pencil' text='수정' onClick={() => this._cngWindow(key)}/>
+                                  <Dropdown.Item icon='trash' text='삭제' onClick={() => this._deleteCmt(el)}/>
+                                </Dropdown.Menu>
+                              </Dropdown>
+                            </Header>
+                          </Segment>
+                          <Segment  attached>{el.coment_text}</Segment>
+                          {!editComment && <button>Logout</button>}
                         </Fragment>
                       )
                     })
