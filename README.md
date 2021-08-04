@@ -9,6 +9,18 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:4000) to view it in the browser.
+
+클라이언트와 서버를 동시에 실행하는 명령어
+만약에 안된다면 아래 있는 모듈을 다운!
+
+yarn global add nodemon
+yarn add nodemon concurrently --dev
+
+
+### `yarn start`
+
+Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
