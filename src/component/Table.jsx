@@ -12,11 +12,11 @@ class Main extends React.Component {
     this.state = { 
       table:[],
       coment:[],
-      comentFnc:'',
+      comentFnc:true,
       coment_autor:"",
       coment_text:"",
       id:props.match.params.id,
-      clickedComment: []
+      clickedComment: ''
     }
   };
 
@@ -158,6 +158,9 @@ class Main extends React.Component {
                 <Segment padded attached>
                   {coment.length !== 0 ? 
                     coment.map( (el, key) => {
+
+                      let { comentFnc } = this.state;
+
                       return(
                         <Fragment>
                           <Segment key={key}  attached='top'>
@@ -174,8 +177,7 @@ class Main extends React.Component {
                               </Dropdown>
                             </Header>
                           </Segment>
-                          <Segment  attached>{el.coment_text}</Segment>
-                          {this.state.comentFnc && this.state.clickedComment === {key} ? <Test id={key} /> : null}
+                          {this.state.clickedComment === {el}, comentFnc ? <Segment  attached>{el.coment_text}</Segment>: <Segment  attached><Input placeholer={el.coment_text}></Input></Segment>}
                         </Fragment>
                       )
                     })
