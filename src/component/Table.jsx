@@ -12,11 +12,11 @@ class Main extends React.Component {
     this.state = { 
       table:[],
       coment:[],
-      comentFnc:true,
       coment_autor:"",
-      coment_text:"",
+      coment_text: "",
+      coment_edit_text: "",
       id:props.match.params.id,
-      clickedComment: ''
+      clickedComment: -1
     }
   };
 
@@ -50,11 +50,15 @@ class Main extends React.Component {
   _textUpdate(e) {
     this.setState({ coment_text : e.target.value })
   }
+  _editComentText(e) {
+    this.setState({ coment_edit_text : e.target.value })
+  }
 
   _getData = async () => {
     const res = await axios.get('/table/'+this.state.id);
     const res1 = await axios.get('/get/coment/'+this.state.id);
     this.setState({ 
+      
       table : res.data,
       coment: res1.data
     })
@@ -79,28 +83,47 @@ class Main extends React.Component {
       }
     }
   }
+  
 
   _cngWindow(coment_id){
-    console.log('coment_id',coment_id)
+    // console.log('coment_id',coment_id)
     this.setState({
-      comentFnc: !this.state.comentFnc, clickedComment: coment_id,
+      clickedComment: coment_id,
     })
-    // console.log(this.state.editComment)
-    // if(this.state.editComment === true){
-    //   this.setState({editComment: !this.state.editComment})
-    // }
-    // else{
-    //   this.setState({editComment: !this.state.editComment})
-    // }
   }
+  
+  _closeWindow() {
+    this.setState({
+      clickedComment: -1
+    })
+  }
+
+
+  _save = async (el) => {
+    const coment_edit_text = this.state.coment_edit_text;
+    const modify = {
+        coment_edit_text: coment_edit_text,
+        id: el.coment_id
+    }
+
+    const res = await axios('/save/coment_data', {
+        method: 'POST',
+        data: {
+            'modify': modify,
+        },
+        headers: new Headers()
+    })
+    console.log('res',res.data);
+    if (res.data) {
+        alert('저장하였습니다.')
+        return window.location.reload();
+    }
+}
 
 
   
   render() {
     const { table,coment} = this.state;
-    console.log('clickedComment',this.state.clickedComment)
-    console.log('comentFnc',this.state.comentFnc)
-
       return(
         <Fragment>
           <Navbar/>
@@ -158,9 +181,6 @@ class Main extends React.Component {
                 <Segment padded attached>
                   {coment.length !== 0 ? 
                     coment.map( (el, key) => {
-
-                      let { comentFnc } = this.state;
-
                       return(
                         <Fragment>
                           <Segment key={key}  attached='top'>
@@ -177,7 +197,11 @@ class Main extends React.Component {
                               </Dropdown>
                             </Header>
                           </Segment>
-                          {this.state.clickedComment === {el}, comentFnc ? <Segment  attached>{el.coment_text}</Segment>: <Segment  attached><Input placeholer={el.coment_text}></Input></Segment>}
+                          {this.state.clickedComment === key ?
+                            <Segment attached>
+                              <Input style={{ width: '100%' }} placeholer={el.coment_text} onChange={(e) => this._editComentText(e)} />
+                              <Button onClick={() => this._closeWindow()}>취소</Button><Button onClick={() => this._save(el)}>확인</Button>
+                            </Segment> : <Segment attached>{el.coment_text}</Segment>}
                         </Fragment>
                       )
                     })

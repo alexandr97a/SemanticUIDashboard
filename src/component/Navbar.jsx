@@ -6,13 +6,11 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-        activeItem: 'home',
     }
   };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   
   render() {
-    const { activeItem } = this.state
       return(
           <Fragment>
             <Segment inverted color="blue" >
@@ -20,12 +18,17 @@ class Navbar extends React.Component {
                     <Menu.Item
                     name='gamepad'
                     as={Link} to='/'
-                    active={activeItem === 'gamepad'}
                     onClick={this.handleItemClick}
                     >
                     <Icon name='dashcube' />
                         Dashboard
                     </Menu.Item>
+                    <Menu.Menu position='right'>
+                      <Menu.Item
+                        name='로그인'
+                        onClick={this.handleItemClick}
+                      />
+                    </Menu.Menu>
                 </Menu>
             </Segment>
           </Fragment>

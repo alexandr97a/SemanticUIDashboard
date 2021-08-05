@@ -1,6 +1,6 @@
 #mylayoutMain{
     max-width: 1600px;
-    min-width: 1000px;
+    /* min-width: 1000px; */
     width: calc( 100% - 100px);
     margin: 0 auto;
 /*    margin: 0 auto !important;*/
@@ -19,7 +19,7 @@
     cursor: pointer;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 999px) {
+/* @media only screen and (min-width: 768px) and (max-width: 999px) {
     #mylayoutMain{
         max-width: 999px;
         min-width: 768px;
@@ -48,4 +48,4 @@
         width: 100%;
     }
 
-}
+} */

@@ -123,6 +123,20 @@ app.get('/get/coment/:id', (req, res) => {
     .catch( err => { throw err })
 })
 
+app.post("/save/coment_data", (req, res) => {
+    console.log('req.body.modify.id',req.body.modify.id)
+            Coment.update({
+                coment_text: req.body.modify.coment_edit_text,
+            },{
+                where:{
+                    coment_id: req.body.modify.id
+                }
+        })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
+
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server On : http://localhost:${PORT}/`);
