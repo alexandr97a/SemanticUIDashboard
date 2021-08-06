@@ -10,15 +10,149 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bCrypt = require('bcrypt');
+const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
 const {
     Customer,
     Table,
     Coment,
+    User,
     Sequelize: { Op }
   } = require('./models');
 sequelize.query('SET NAMES utf8;');
 
+
+app.use(flash())
+app.use(cookieParser());
+app.use(session({
+    secret: 'keyboard cat'
+}));
+app.use(passport.initialize());
+
+// require('./models/passport')(passport, sequelize.user);
+
+passport.serializeUser(function (user, done) {
+    // console.log("serializeadmins", user)
+    done(null, user.user_email);
+});
+
+passport.deserializeUser(function (user_email, done) {
+    User.findByPk(user_email, function (err, user) {
+        done(err, user);
+    });
+});
+
+
+passport.use(new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password',
+    passReqToCallback: true
+}, function (req, username, password, done) {
+    User
+        .findOne({
+            where: {
+                user_email: username
+            }
+        })
+        .then(function (user) {
+            if (!user) {
+                console.log('Email does not exist');
+                return done(null, false, {
+                    message: 'Email does not exist'
+                });
+            }
+            bCrypt.compare(password, user.user_password, function (err, matches) {
+                console.log('password', password)
+                console.log('user.user_password', user.user_password)
+                
+                if (err)
+                    console.log('Error while checking password');
+                else if (matches) {
+                    console.log('The password matches!');
+                    var userInfo = user.get();
+                    console.log("login success", userInfo);
+                    req.session.user = userInfo;
+                    return done(null, userInfo);
+                } else {
+                    console.log('The password does NOT match!');
+                    return done(null, false, {
+                        message: 'Something went wrong with your Signin'
+                    });
+                }
+            });
+        })
+        .catch(function (err) {
+            console.log("Error:!!", err);
+            return done(null, false, {
+                message: 'Something went wrong with your Signin'
+            });
+        });
+}));
+
+// app.get('/admin_login', function (req, res, next) {     res.render('home',
+// {"user_id": req.user.ID}); });
+
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/g',
+    failureFlash: true
+}));
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+
+
+//로그인
+app.get('/login', (req, res) => {
+    console.log("login success", req.session.user);
+    res.send(req.session.user);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 이후 추가할 코드 영역
+app.post('/add/user', (req, res) => {
+    User.create({
+        user_name : req.body.user_name,
+        user_email : req.body.user_email,
+        user_password: bCrypt.hashSync(req.body.user_password, bCrypt.genSaltSync(10),null),
+        user_phone : req.body.user_phone,
+        user_birthday : req.body.user_birthday
+    })
+    .then( result => {
+        res.send(result)
+    })
+    .catch( err => {
+        console.log(err)
+        throw err;
+    })
+})
+
 
 app.post('/add/table', (req, res) => {
     Table.create({

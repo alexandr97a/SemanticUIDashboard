@@ -4,7 +4,6 @@ import Navbar from "./Navbar.jsx";
 import { Segment, Grid, Header, Form, Button, TextArea,Icon, Dropdown, Input } from 'semantic-ui-react'
 import Moment from 'react-moment';
 import '../style/Table.css'
-import Test from "./Test.jsx";
 
 class Main extends React.Component {
   constructor(props) {

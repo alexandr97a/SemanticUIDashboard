@@ -34,6 +34,8 @@ let sequelize = new Sequelize(
     db.Customer = require('./customer')(sequelize, Sequelize);
     db.Table = require('./table')(sequelize, Sequelize);
     db.Coment = require('./coment')(sequelize, Sequelize);
+    db.User = require('./user')(sequelize, Sequelize);
+    
 
     db.Table.hasMany(db.Coment,{as: "coment"});
     db.Coment.belongsTo(db.Table,{as: 'table'});
