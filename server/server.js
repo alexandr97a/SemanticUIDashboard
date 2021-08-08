@@ -18,7 +18,6 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const {
-    Customer,
     Table,
     Coment,
     User,
@@ -99,7 +98,7 @@ passport.use(new LocalStrategy({
 
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/g',
+    failureRedirect: '/login',
     failureFlash: true
 }));
 
@@ -112,7 +111,7 @@ app.get('/logout', function(req, res){
 
 //로그인
 app.get('/login', (req, res) => {
-    console.log("login success", req.session.user);
+    console.log("login success", req.session.user.user_name);  // 이거 이상함 
     res.send(req.session.user);
 })
 
@@ -157,7 +156,7 @@ app.post('/add/user', (req, res) => {
 app.post('/add/table', (req, res) => {
     Table.create({
         table_title : req.body.table_title,
-        table_autor : req.body.table_autor,
+        table_autor : req.session.user.user_name,
         table_text : req.body.table_text
     })
     .then( result => {
@@ -226,7 +225,7 @@ app.post("/save/table_data",(req,res)=>{
 
 app.post('/add/coment', (req, res) => {
     Coment.create({
-        coment_autor : req.body.coment_autor,
+        coment_autor : req.session.user.user_name,
         coment_text : req.body.coment_text,
         tableTableId: req.body.table_id,
     })

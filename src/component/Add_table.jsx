@@ -12,20 +12,18 @@ class Add_table extends React.Component {
     super(props);
     this.state = { 
       table_title:"",
-      table_autor:"",
-      table_text:""
+      table_text: ""
     }
   };
 
   _addTable = async(e) => {
-    const { table_title, table_autor,table_text } = this.state;
+    const { table_title,table_text } = this.state;
     e.preventDefault();
 
     const res = await axios('/add/table', {
       method : 'POST',
       data : { 
         'table_title' : table_title,
-        'table_autor' : table_autor,
         'table_text' : table_text
      },
       headers: new Headers()
@@ -40,12 +38,9 @@ class Add_table extends React.Component {
   _titleUpdate(e) {
     this.setState({ table_title : e.target.value })
   }
-  _autorUpdate(e) {
-    this.setState({ table_autor : e.target.value })
-  }
   _textUpdate(data) {
-    this.setState({ table_text : data })}
-
+    this.setState({ table_text: data })
+  }
   
   render() {
       return(
@@ -57,10 +52,6 @@ class Add_table extends React.Component {
                 <Form.Field required>
                   <label>제목</label>
                   <Input placeholder='제목' onChange={(e) => this._titleUpdate(e)}/>
-                </Form.Field>
-                <Form.Field required>
-                  <label>글쓴이</label>
-                  <Input placeholder='글쓴이' onChange={(e) => this._autorUpdate(e)}/>
                 </Form.Field>
                 <CKEditor
                         editor={ ClassicEditor }

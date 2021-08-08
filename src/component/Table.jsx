@@ -11,7 +11,6 @@ class Main extends React.Component {
     this.state = { 
       table:[],
       coment:[],
-      coment_autor:"",
       coment_text: "",
       coment_edit_text: "",
       id:props.match.params.id,
@@ -24,13 +23,12 @@ class Main extends React.Component {
   }
 
   _addTable = async(e) => {
-    const { coment_autor, coment_text } = this.state;
+    const { coment_text } = this.state;
     e.preventDefault();
 
     const res = await axios('/add/coment', {
       method : 'POST',
       data : { 
-        'coment_autor' : coment_autor,
         'coment_text' : coment_text,
         'table_id' : this.state.id
      },
@@ -43,9 +41,6 @@ class Main extends React.Component {
     }
   }
 
-  _autorUpdate(e) {
-    this.setState({ coment_autor : e.target.value })
-  }
   _textUpdate(e) {
     this.setState({ coment_text : e.target.value })
   }
@@ -164,10 +159,6 @@ class Main extends React.Component {
                       댓글
                     </Header>
                     <Form onSubmit={this._addTable}>
-                    <Form.Field>
-                      <label>이름</label>
-                      <input placeholder='이름' onChange={(e) => this._autorUpdate(e)}/>
-                    </Form.Field>
                     <Form.Field
                       control={TextArea}
                       label='내용'

@@ -98,7 +98,6 @@ class Main extends React.Component {
                             </Button>
                           </Table.Cell>
                         </Table.Row>
-
                       )
                     })
                     : <Fragment>데이터가 없습니다.</Fragment>}

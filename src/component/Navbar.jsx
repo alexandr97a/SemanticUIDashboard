@@ -8,14 +8,14 @@ class Navbar extends React.Component {
     super(props);
     this.state = {
       list: [],
+      logout:[],
       didLoad: false
     }
   };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-  
 
-    componentDidMount() {
-      this._getData();
+  componentDidMount() {
+    this._getData();
   }
 
   _getData = async () => {
@@ -25,12 +25,13 @@ class Navbar extends React.Component {
           cover.push(res.data);
           return this.setState({ list: cover, didLoad: true })
       }
-      this.setState({ list: res.data });
+      const res1 = await axios.get('/logout');
+      this.setState({ list: res.data, logout:res1.data });
   }
   
   render() {
     const user = this.state.list[0];
-    console.log('user',user)
+    // console.log('user',user)
       return(
           <Fragment>
             <Segment inverted color="blue" >
@@ -46,15 +47,18 @@ class Navbar extends React.Component {
                     <Menu.Menu position='right'>
                     {user === undefined ?
                       <Menu.Item
-                        name='로그아웃'
-                        as={Link} to='/login'
+                      name='로그인'
+                      as={Link} to='/login'
+                      onClick={this.handleItemClick}
+                  /> : <>
+                    {/* <Menu.Item
                         onClick={this.handleItemClick}
-                        /> :
-                        <Menu.Item
-                        name='로그인'
-                        as={Link} to='/login'
-                        onClick={this.handleItemClick}
-                        />}
+                      >{user.user_name}</Menu.Item> */}
+                    <Menu.Item
+                      method="post" action="/logout"
+                      onClick={this.handleItemClick}
+                      >로그아웃</Menu.Item>
+                      </>}
                     </Menu.Menu>
                 </Menu>
             </Segment>
