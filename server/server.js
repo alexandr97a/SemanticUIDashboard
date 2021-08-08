@@ -103,11 +103,10 @@ app.post('/login', passport.authenticate('local', {
 }));
 
 app.get('/logout', function(req, res){
-  req.logout();
+    req.logout();
+    console.log('req.logout()',req.logout)
   res.redirect('/');
 });
-
-
 
 //로그인
 app.get('/login', (req, res) => {

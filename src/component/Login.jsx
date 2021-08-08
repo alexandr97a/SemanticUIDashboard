@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Button, Form, Grid, Header, Message, } from 'semantic-ui-react'
-import Navbar from "./Navbar";
 
 class Login extends React.Component {
   state = {
@@ -19,7 +18,6 @@ class Login extends React.Component {
   render() {
       return(
         <Fragment>
-          <Navbar/>
             <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 450 }}>
                     <Header as='h2' color='blue' textAlign='center'>
