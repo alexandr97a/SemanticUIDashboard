@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import { Link } from 'react-router-dom'
-import { Icon,Grid,Table,Button, Menu } from 'semantic-ui-react'
+import { Icon,Grid,Table,Button, Pagination } from 'semantic-ui-react'
 import axios from 'axios';
 import Moment from 'react-moment';
 import Navbar from "./Navbar";
@@ -11,7 +11,8 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      table : [],
+      table: [],
+      pageSize: 10
     }
   };
 
@@ -105,16 +106,7 @@ class Main extends React.Component {
                 <Table.Footer>
                 <Table.Row>
                   <Table.HeaderCell colSpan='5'>
-                    <Menu floated='right' pagination>
-                      <Menu.Item as='a' icon>
-                        <Icon name='chevron left' />
-                      </Menu.Item>
-                      <Menu.Item as='a'>1</Menu.Item>
-
-                      <Menu.Item as='a' icon>
-                        <Icon name='chevron right' />
-                      </Menu.Item>
-                    </Menu>
+                    <Pagination floated="right" defaultActivePage={1} totalPages={10} />
                   </Table.HeaderCell>
                 </Table.Row>
               </Table.Footer>

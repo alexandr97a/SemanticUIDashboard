@@ -1,15 +1,13 @@
 import React, { Fragment } from "react";
 import axios from 'axios';
-import { Icon,Segment,Menu } from 'semantic-ui-react'
+import { Icon,Segment,Menu,Form, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: [],
-      logout:[],
-      didLoad: false
+      list: []
     }
   };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -25,13 +23,14 @@ class Navbar extends React.Component {
           cover.push(res.data);
           return this.setState({ list: cover, didLoad: true })
       }
-      const res1 = await axios.get('/logout');
-      this.setState({ list: res.data, logout:res1.data });
+      this.setState({ list: res.data});
   }
   
   render() {
     const user = this.state.list[0];
-    // console.log('user',user)
+    console.log('state', this.state)
+    console.log('user', user)
+    
       return(
           <Fragment>
             <Segment inverted color="blue" >
@@ -45,7 +44,7 @@ class Navbar extends React.Component {
                         Dashboard
                     </Menu.Item>
                     <Menu.Menu position='right'>
-                    {user === undefined ?
+                    {user === undefined || user.user_name === undefined ?
                       <Menu.Item
                       name='로그인'
                       as={Link} to='/login'
@@ -54,10 +53,16 @@ class Navbar extends React.Component {
                     {/* <Menu.Item
                         onClick={this.handleItemClick}
                       >{user.user_name}</Menu.Item> */}
-                    <Menu.Item
-                      method="post" action="/logout"
+                    <Form size='large' method="get" action="http://127.0.0.1:4000/logout">
+                     
+                    <Button color='blue' fluid size='large' type="submit">
+                      Logout
+                    </Button>
+                    </Form>
+                    {/* <Menu.Item
+                      as={Link} to='/logout'
                       onClick={this.handleItemClick}
-                      >로그아웃</Menu.Item>
+                      >{user.user_name}</Menu.Item> */}
                       </>}
                     </Menu.Menu>
                 </Menu>

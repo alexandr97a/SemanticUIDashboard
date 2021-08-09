@@ -56,6 +56,7 @@ passport.use(new LocalStrategy({
         .findOne({
             where: {
                 user_email: username
+                
             }
         })
         .then(function (user) {
@@ -82,7 +83,7 @@ passport.use(new LocalStrategy({
                     return done(null, false, {
                         message: 'Something went wrong with your Signin'
                     });
-                }
+                } 
             });
         })
         .catch(function (err) {
@@ -101,17 +102,21 @@ app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
     failureFlash: true
 }));
-
-app.get('/logout', function(req, res){
-    req.logout();
-    console.log('req.logout()',req.logout)
-  res.redirect('/');
+ 
+app.get('/logout', (req, res) => {
+    console.log("logout");
+    req.logOut();
+    res.redirect('/');
 });
 
 //로그인
-app.get('/login', (req, res) => {
-    console.log("login success", req.session.user.user_name);  // 이거 이상함 
+app.get('/login', (req, res) => { 
+    console.log("login success", req.session.user);  // 이거 이상함 
     res.send(req.session.user);
+})
+
+app.get('/', (req, res) => {
+    res.redirect('http://127.0.0.1:3000/');
 })
 
 
@@ -119,7 +124,7 @@ app.get('/login', (req, res) => {
 
 
 
-
+ 
 
 
 
